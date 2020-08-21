@@ -1,11 +1,15 @@
-import { Button } from '@chakra-ui/core'
 import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
+import LoginPage from './pages/Login'
 
 const App:React.FC = () => {
   return (
-    <div>Hello World
-      <Button variantColor="blue" >Teste</Button>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={LoginPage}></Route>
+      </Switch>
+    </Router>
   )
 }
 
