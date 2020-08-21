@@ -1,8 +1,11 @@
+import { Button } from '@chakra-ui/core'
 import React from 'react'
 
 const App:React.FC = () => {
   return (
-    <div>Hello World</div>
+    <div>Hello World
+      <Button variantColor="blue" >Teste</Button>
+    </div>
   )
 }
 
