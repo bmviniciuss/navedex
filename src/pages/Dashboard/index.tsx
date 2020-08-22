@@ -1,6 +1,7 @@
 import faker from 'faker'
 import React, { useEffect, useReducer, useState, useMemo } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { useHistory } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 
 import Button from '../../compoents/Button'
@@ -11,6 +12,7 @@ import { dashboardReducer, initialState, DashboardActionsTypes } from './dashboa
 import './styles.css'
 
 const DashboardPage:React.FC = () => {
+  const history = useHistory()
   const [{ navers, loading }, dispatch] = useReducer(dashboardReducer, initialState)
   const [filterInput, setFilterInput] = useState('')
   const [filter, setFilter] = useState('')
@@ -88,7 +90,7 @@ const DashboardPage:React.FC = () => {
         </form>
 
         <div className="create-navers-wrapper">
-          <Button color="black">Adicionar Naver</Button>
+          <Button color="black" onClick={() => history.push('/navers/criar')}>Adicionar Naver</Button>
         </div>
 
       </div>
