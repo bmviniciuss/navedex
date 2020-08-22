@@ -87,7 +87,7 @@ const LoginPage: React.FC = () => {
         {globalError && <ErrorAlert className="mt-5" text={globalError}/>}
 
         <div className="mt-5">
-          <Button fullWidth type="submit" loading={loading} disabled={loading}>Entrar</Button>
+          <Button fullWidth type="submit" loading={loading} disabled={loading} color="black">Entrar</Button>
         </div>
 
       </form>
