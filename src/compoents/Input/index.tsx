@@ -5,7 +5,7 @@ type LabelProps = {
     text: string
     htmlFor: string
   }
-  error: string | undefined
+  error?: string | undefined
 }
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & LabelProps
