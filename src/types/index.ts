@@ -7,3 +7,8 @@ export interface Naver {
   projects: string
   avatar: string
 }
+
+export interface AuthUserData {
+  id: string
+  email: string
+}

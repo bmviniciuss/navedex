@@ -1,13 +1,18 @@
 import { ThemeProvider, theme } from '@chakra-ui/core'
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+
+import { AuthProvider } from '../contexts/AuthContext'
 
 const Providers: React.FC = ({ children }) => {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        {children}
-      </ThemeProvider>
-    </>
+    <BrowserRouter>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          {children}
+        </ThemeProvider>
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 

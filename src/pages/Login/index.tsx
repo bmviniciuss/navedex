@@ -1,15 +1,15 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 import Button from '../../compoents/Button'
 import ErrorAlert from '../../compoents/ErrorAlert'
 import Input from '../../compoents/Input'
-import { apiLogin } from '../../external/api'
-import { saveAuthToken } from '../../services/localStorage'
+import AuthContext from '../../contexts/AuthContext'
 import { loginReducer, initialState, LoginReducerTypes } from './loginReducer'
 
 const LoginPage: React.FC = () => {
+  const auth = useContext(AuthContext)
   const [state, dispatch] = useReducer(loginReducer, initialState)
   const history = useHistory()
 
@@ -24,14 +24,13 @@ const LoginPage: React.FC = () => {
     dispatch({ type: LoginReducerTypes.LOGIN })
 
     const { data: { email, password } } = state
-    console.log('PRE REQUEST', { email, password })
 
     try {
-      const data = await apiLogin({ email, password })
+      await auth.login({ email, password })
       dispatch({ type: LoginReducerTypes.LOGIN_SUCCESS })
-      saveAuthToken(data.token)
       history.push('/dashboard')
     } catch (error) {
+      console.error(error)
       dispatch({ type: LoginReducerTypes.LOGIN_ERROR, message: 'Email ou senha incorreta. Tente novamente.' })
     }
   }
