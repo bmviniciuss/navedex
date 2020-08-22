@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-import { apiLogin } from '../external/api'
+import { apiLogin, api } from '../external/api'
 import { LoginParams } from '../external/types'
 import { saveAuthUser, saveAuthToken, getAuthUser, getAuthToken } from '../services/localStorage'
 import { AuthUserData } from '../types'
@@ -25,6 +25,7 @@ export const AuthProvider:React.FC = ({ children }) => {
     if (storedUser && storedToken) {
       setUser(storedUser)
       setToken(storedToken)
+      api.defaults.headers.authorization = `Bearer ${storedToken}`
     }
     setLoading(false)
   }, [])

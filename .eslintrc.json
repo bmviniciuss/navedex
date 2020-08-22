@@ -23,6 +23,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "camelcase":"off",
     "@typescript-eslint/explicit-module-boundary-types":"off",
     "react/prop-types": "off",
     "import-helpers/order-imports": [

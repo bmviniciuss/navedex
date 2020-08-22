@@ -1,11 +1,12 @@
 export interface Naver {
-  id: string,
+  id: string
   name: string
-  position: string
-  age: number
-  time: number
-  projects: string
-  avatar: string
+  admission_date: string
+  job_role: string
+  user_id: string
+  project: string
+  birthdate: string
+  url: string
 }
 
 export interface AuthUserData {

@@ -2,7 +2,7 @@ import faker from 'faker'
 
 import { Naver } from '../types'
 
-export function mockNaver (): Naver {
+export function mockNaver () {
   return {
     id: faker.random.uuid(),
     name: faker.name.findName(),
