@@ -7,11 +7,6 @@ import Input from '../../compoents/Input'
 import { apiLogin } from '../../external/api'
 import { loginReducer, initialState, LoginReducerTypes } from './loginReducer'
 
-interface FormData {
-  email: string
-  password:string
-}
-
 const LoginPage: React.FC = () => {
   const [state, dispatch] = useReducer(loginReducer, initialState)
 
