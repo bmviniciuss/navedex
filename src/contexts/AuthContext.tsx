@@ -2,7 +2,13 @@ import React, { createContext, useState, useEffect } from 'react'
 
 import { apiLogin, api } from '../external/api'
 import { LoginParams } from '../external/types'
-import { saveAuthUser, saveAuthToken, getAuthUser, getAuthToken } from '../services/localStorage'
+import {
+  saveAuthUser,
+  saveAuthToken,
+  getAuthUser,
+  getAuthToken,
+  clearAuthUser, clearAuthToken
+} from '../services/localStorage'
 import { AuthUserData } from '../types'
 
 interface AuthContextType {
@@ -10,6 +16,7 @@ interface AuthContextType {
   user?: AuthUserData
   loading: boolean
   login(params: LoginParams): Promise<void>
+  logout(): void
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -42,8 +49,15 @@ export const AuthProvider:React.FC = ({ children }) => {
     }
   }
 
+  function logout () {
+    setUser(undefined)
+    clearAuthUser()
+    setToken('')
+    clearAuthToken()
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, token, loading } }>
+    <AuthContext.Provider value={{ user, login, token, loading, logout } }>
       {children}
     </AuthContext.Provider>
   )

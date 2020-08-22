@@ -1,9 +1,11 @@
 import React from 'react'
 
+import Navbar from '../Navbar'
+
 const Layout:React.FC = ({ children }) => {
   return (
     <div className="bg-gray-100 h-full w-full">
-      <nav className="p-4 border">Navigation TODO</nav>
+      <Navbar />
       <main className="mx-auto mt-8" style={{ width: '90%', maxWidth: '1280px' }}>{children}</main>
     </div>
   )
