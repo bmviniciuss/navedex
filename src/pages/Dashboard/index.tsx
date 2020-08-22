@@ -24,7 +24,6 @@ const DashboardPage:React.FC = () => {
       dispatch({ type: DashboardActionsTypes.GET_NAVERS_SUCCESS, navers: dataWithFakeAvatar })
     } catch (error) {
       dispatch({ type: DashboardActionsTypes.GET_NAVERS_ERROR, message: 'Ocorreu um erro ao buscar os navers' })
-      console.log()
     }
   }
 
