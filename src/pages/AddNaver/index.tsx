@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 
+import Alert from '../../compoents/Alert'
+import NaverForm from '../../compoents/NaverForm'
+import { createNaver } from '../../external/api'
+import { CreateNaverType } from '../../external/types'
+
 const AddNaver:React.FC = () => {
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
+
   const history = useHistory()
+
+  async function makeCreateRequest (data: CreateNaverType) {
+    setError('')
+    setSuccess(false)
+    try {
+      await createNaver(data)
+      setSuccess(true)
+    } catch (error) {
+      setError('Ocorreu um erro ao criar o Naver. Tente novamente.')
+      throw new Error(error)
+    }
+  }
 
   return (
     <section>
@@ -17,6 +37,13 @@ const AddNaver:React.FC = () => {
 
         <h1 className="font-bold text-gray-900 text-4xl">Adicionar Naver</h1>
 
+      </div>
+
+      {success && <Alert className="my-4" text="Naver criado com sucesso." type="success"/>}
+      {error && <Alert className="my-4" text={error} type="error"/>}
+
+      <div className="mt-4">
+        <NaverForm handleRequest={makeCreateRequest}/>
       </div>
 
     </section>

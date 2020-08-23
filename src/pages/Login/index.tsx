@@ -2,8 +2,8 @@ import React, { useReducer, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg'
+import Alert from '../../compoents/Alert'
 import Button from '../../compoents/Button'
-import ErrorAlert from '../../compoents/ErrorAlert'
 import Input from '../../compoents/Input'
 import AuthContext from '../../contexts/AuthContext'
 import { loginReducer, initialState, LoginReducerTypes } from './loginReducer'
@@ -82,7 +82,7 @@ const LoginPage: React.FC = () => {
           error={errors.password}
         />
 
-        {globalError && <ErrorAlert className="mt-5" text={globalError}/>}
+        {globalError && <Alert className="mt-5" text={globalError} type="error"/>}
 
         <div className="mt-5">
           <Button fullWidth type="submit" loading={loading} disabled={loading} color="black">Entrar</Button>

@@ -4,12 +4,14 @@ interface Props {
   prefix?: string
   text: string
   className?: string
+  type: 'success' | 'error'
 }
 
-const ErrorAlert:React.FC<Props> = ({ prefix, text, className }) => {
+const Alert:React.FC<Props> = ({ prefix, text, type, className }) => {
   const componentClassName = useMemo(() => {
-    return ['bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative', className].join(' ')
-  }, [className])
+    const color = type === 'success' ? 'green' : 'red'
+    return [`bg-${color}-100 border border-${color}-400 text-${color}-700 px-4 py-3 rounded relative`, className].join(' ')
+  }, [className, type])
 
   return (
     <div className={componentClassName} role="alert">
@@ -21,4 +23,4 @@ const ErrorAlert:React.FC<Props> = ({ prefix, text, className }) => {
   )
 }
 
-export default memo(ErrorAlert)
+export default memo(Alert)
