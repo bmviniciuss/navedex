@@ -8,3 +8,12 @@ export interface LoginReturnType {
   id: string
   token: string
 }
+
+export interface CreateNaverType {
+  name: string
+  birthdate: string
+  job_role: string
+  project: string
+  admission_date: string
+  url: string
+}
