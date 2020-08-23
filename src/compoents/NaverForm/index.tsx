@@ -4,7 +4,7 @@ import React, { useReducer } from 'react'
 import { CreateNaverType } from '../../external/types'
 import Button from '../Button'
 import Input from '../Input'
-import { naverFormReducer, initialState, NaverFormReducerTypes, ErrorsType } from './naverFormReducer'
+import { naverFormReducer, initialState, NaverFormReducerTypes, ErrorsType, NaverFormState } from './naverFormReducer'
 
 export interface FormData {
   name: string
@@ -17,10 +17,17 @@ export interface FormData {
 
 interface Props {
   handleRequest(data:CreateNaverType): void
+  naverInitialState?: FormData
 }
 
-const NaverForm:React.FC<Props> = ({ handleRequest }) => {
-  const [{ data, errors, loading }, dispatch] = useReducer(naverFormReducer, initialState)
+function parseDate (date: string) {
+  const [year, month, day] = date.split('-')
+  return new Date(Number(year), Number(month) - 1, Number(day))
+}
+
+const NaverForm:React.FC<Props> = ({ handleRequest, naverInitialState }) => {
+  const reducerInitialState:NaverFormState = { ...initialState, data: { ...initialState.data, ...naverInitialState } }
+  const [{ data, errors, loading }, dispatch] = useReducer(naverFormReducer, reducerInitialState)
 
   async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -31,10 +38,12 @@ const NaverForm:React.FC<Props> = ({ handleRequest }) => {
     } else {
       dispatch({ type: NaverFormReducerTypes.ACTION })
       try {
+        console.log('ORIGINAL', data.birthdate)
+
         const toPostData:FormData = {
           ...data,
-          birthdate: format(new Date(data.birthdate), 'dd/MM/yyyy'),
-          admission_date: format(new Date(data.admission_date), 'dd/MM/yyyy')
+          birthdate: format(parseDate(data.birthdate), 'dd/MM/yyyy'),
+          admission_date: format(parseDate(data.admission_date), 'dd/MM/yyyy')
         }
         console.log(toPostData)
         await handleRequest(toPostData)

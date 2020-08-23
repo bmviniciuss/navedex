@@ -6,6 +6,7 @@ import PrivateRoute from './compoents/PrivateRoute'
 import AddNaver from './pages/AddNaver'
 import DashboardPage from './pages/Dashboard'
 import LoginPage from './pages/Login'
+import UpdateNaver from './pages/UpdateNaver'
 
 const App:React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App:React.FC = () => {
       <Layout>
         <PrivateRoute exact path="/dashboard" component={DashboardPage} />
         <PrivateRoute exact path="/navers/criar" component={AddNaver} />
+        <PrivateRoute exact path="/navers/editar/:id" component={UpdateNaver} />
       </Layout>
     </Switch>
   )
