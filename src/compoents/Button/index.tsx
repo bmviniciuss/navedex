@@ -8,7 +8,7 @@ type CustomProps = {
 
 type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & CustomProps
 
-const Button:React.FC<Props> = ({ children, disabled, color, fullWidth = false, loading = false, ...props }:Props) => {
+const Button:React.FC<Props> = ({ children, disabled, color, fullWidth = false, loading = false, className, ...props }:Props) => {
   const btnClass = useMemo(() => {
     const tailwindColor = 'blue'
     let bgColor = `bg-${tailwindColor}-500`
@@ -23,7 +23,7 @@ const Button:React.FC<Props> = ({ children, disabled, color, fullWidth = false, 
   }, [disabled, color, fullWidth])
 
   return (
-    <button className={btnClass} disabled={disabled} {...props}>
+    <button className={[btnClass, className].join(' ')} disabled={disabled} {...props}>
       {loading
         ? <PulseLoader size="10px" css='display: block; margin: 0 auto;' color="#ffffff" loading={loading} />
         : children
