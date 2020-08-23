@@ -6,11 +6,12 @@ type LabelProps = {
     htmlFor: string
   }
   error?: string | undefined
+  wrapperClassName?: string
 }
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & LabelProps
 
-const Input:React.FC<Props> = ({ label, error, ...props }:Props) => {
+const Input:React.FC<Props> = ({ label, error, wrapperClassName = 'mt-5', ...props }:Props) => {
   const inputClass = useMemo(() => {
     const baseCss = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
     let classes = baseCss
@@ -26,7 +27,7 @@ const Input:React.FC<Props> = ({ label, error, ...props }:Props) => {
   }, [props.disabled, error])
 
   return (
-    <div className="mt-5">
+    <div className={wrapperClassName}>
       {label && (
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={label.htmlFor}>{label.text}</label>
       )}
