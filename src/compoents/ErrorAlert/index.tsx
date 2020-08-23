@@ -14,7 +14,7 @@ const ErrorAlert:React.FC<Props> = ({ prefix, text, className }) => {
   return (
     <div className={componentClassName} role="alert">
       {prefix && (
-        <strong className="font-bold">Holy smokes!</strong>
+        <strong className="font-bold">{prefix}</strong>
       )}
       <span className="block sm:inline">{text}</span>
     </div>
