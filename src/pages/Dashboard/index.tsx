@@ -1,52 +1,47 @@
-import faker from 'faker'
-import React, { useEffect, useReducer, useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { useQuery } from 'react-query'
 import { useHistory } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 
 import Button from '../../compoents/Button'
 import NaverCard from '../../compoents/NaverCard'
 import { getNavers } from '../../external/api'
-import { dashboardReducer, initialState, DashboardActionsTypes } from './dashboardReducer'
 
 import './styles.css'
 
 const DashboardPage:React.FC = () => {
   const history = useHistory()
-  const [{ navers, loading }, dispatch] = useReducer(dashboardReducer, initialState)
+  const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
+    retry: false,
+    onError: () => {
+      console.log('DEU RUIM')
+    }
+  })
+
   const [filterInput, setFilterInput] = useState('')
   const [filter, setFilter] = useState('')
 
-  async function makeGetNaversRequest () {
-    dispatch({ type: DashboardActionsTypes.GET_NAVERS })
-    try {
-      const data = await getNavers()
-      const dataWithFakeAvatar = data.map((n) => {
-        return {
-          ...n,
-          url: faker.internet.avatar()
-        }
-      })
-      dispatch({ type: DashboardActionsTypes.GET_NAVERS_SUCCESS, navers: dataWithFakeAvatar })
-    } catch (error) {
-      dispatch({ type: DashboardActionsTypes.GET_NAVERS_ERROR, message: 'Ocorreu um erro ao buscar os navers' })
-    }
+  const filtertedNavers = useMemo(() => {
+    if (!data) return []
+    return filter ? data.filter((naver) => {
+      return naver.name.trim().toLowerCase().includes(filter.trim().toLowerCase())
+    }) : data
+  }, [data, filter])
+
+  if (isError) {
+    return (
+      <div>
+        Erroo
+        <button onClick={() => refetch()}>Refetch</button>
+      </div>
+    )
   }
 
-  useEffect(() => {
-    makeGetNaversRequest()
-  }, [])
-
-  const filtertedNavers = useMemo(() => {
-    return filter ? navers.filter((naver) => {
-      return naver.name.trim().toLowerCase().includes(filter.trim().toLowerCase())
-    }) : navers
-  }, [navers, filter])
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex flex-col justify-center items-center h-full w-full mt-16">
-        <HashLoader size="35px" css='display: block; margin: 0 auto;' color="#1A202C" loading={loading} />
+        <HashLoader size="35px" css='display: block; margin: 0 auto;' color="#1A202C" loading={isLoading} />
       </div>
     )
   }
