@@ -22,7 +22,6 @@ const DashboardPage:React.FC = () => {
   const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
     retry: false,
     refetchOnWindowFocus: false
-
   })
 
   const [filterInput, setFilterInput] = useState('')

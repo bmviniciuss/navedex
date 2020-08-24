@@ -35,7 +35,7 @@ export const AuthProvider:React.FC = ({ children }) => {
       api.defaults.headers.authorization = `Bearer ${storedToken}`
     }
     setLoading(false)
-  }, [])
+  }, [token])
 
   async function login (params: LoginParams) {
     try {
