@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/core'
 import React, { useState } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
@@ -8,6 +9,7 @@ import { createNaver } from '../../external/api'
 import { CreateNaverType } from '../../external/types'
 
 const AddNaver:React.FC = () => {
+  const toast = useToast()
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
@@ -19,8 +21,22 @@ const AddNaver:React.FC = () => {
     try {
       await createNaver(data)
       setSuccess(true)
+      toast({
+        title: 'Naver Criado',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right'
+      })
     } catch (error) {
-      setError('Ocorreu um erro ao criar o Naver. Tente novamente.')
+      toast({
+        title: 'Erro',
+        description: 'Ocorreu um erro ao criar o Naver. Tente novamente.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right'
+      })
       throw new Error(error)
     }
   }
