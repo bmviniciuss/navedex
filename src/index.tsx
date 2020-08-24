@@ -7,6 +7,8 @@ import Providers from './Providers'
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/index.css'
 
+// Modal.setAppElement('#root')
+
 ReactDOM.render(
   <React.StrictMode>
     <Providers>

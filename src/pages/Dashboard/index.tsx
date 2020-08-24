@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useContext } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useQuery } from 'react-query'
 import { useHistory } from 'react-router-dom'
@@ -8,11 +8,15 @@ import { ReactComponent as NoData } from '../../assets/undraw_no_data_qbuo.svg'
 import { ReactComponent as NotFound } from '../../assets/undraw_not_found_60pq.svg'
 import Button from '../../compoents/Button'
 import NaverCard from '../../compoents/NaverCard'
+import NaverModal from '../../compoents/NaverModal'
+import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNavers } from '../../external/api'
 
 import './styles.css'
 
 const DashboardPage:React.FC = () => {
+  const { naver, closeNaver } = useContext(NaverModalContext)
+
   const history = useHistory()
   const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
     retry: false,
@@ -52,7 +56,9 @@ const DashboardPage:React.FC = () => {
 
   return (
     <section>
-
+      {naver && (
+        <NaverModal naver={naver} onClose={closeNaver} />
+      )}
       <h1 className="font-bold text-gray-900 text-4xl mb-3">Navers</h1>
 
       <div className="mb-8 flex flex-row justify-between flex-wrap">

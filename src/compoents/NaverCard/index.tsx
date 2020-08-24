@@ -1,6 +1,9 @@
+import { Button } from '@chakra-ui/core'
 import { differenceInYears } from 'date-fns'
-import React from 'react'
+import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 
+import NaverModalContext from '../../contexts/NaverModalContext'
 import { Naver } from '../../types'
 
 interface Props {
@@ -8,6 +11,9 @@ interface Props {
 }
 
 const NaverCard:React.FC<Props> = ({ naver }) => {
+  const { openNaver } = useContext(NaverModalContext)
+  const history = useHistory()
+
   const age = differenceInYears(new Date(), new Date(naver.birthdate))
   return (
     <div >
@@ -28,6 +34,10 @@ const NaverCard:React.FC<Props> = ({ naver }) => {
           <div className="mt-2">
             <div className="text-gray-600 text-sm"> Projetos</div>
             { naver.project ? naver.project : 'Sem Projetos'}
+          </div>
+          <div className="mt-4">
+            <Button className="text-gray-900 focus:outline-none" onClick={() => history.push(`navers/editar/${naver.id}`)}>Edit</Button>
+            <Button className="text-gray-900 focus:outline-none" onClick={() => openNaver(naver)}>Show</Button>
           </div>
         </div>
       </div>
