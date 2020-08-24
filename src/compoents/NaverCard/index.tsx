@@ -1,6 +1,7 @@
-import { Button } from '@chakra-ui/core'
+import { Button, IconButton } from '@chakra-ui/core'
 import { differenceInYears } from 'date-fns'
 import React, { useContext } from 'react'
+import { MdModeEdit, MdDelete } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
 import NaverModalContext from '../../contexts/NaverModalContext'
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const NaverCard:React.FC<Props> = ({ naver }) => {
-  const { openNaver } = useContext(NaverModalContext)
+  const { openNaver, openDeleteNaver } = useContext(NaverModalContext)
   const history = useHistory()
 
   const age = differenceInYears(new Date(), new Date(naver.birthdate))
@@ -36,8 +37,11 @@ const NaverCard:React.FC<Props> = ({ naver }) => {
             { naver.project ? naver.project : 'Sem Projetos'}
           </div>
           <div className="mt-4">
-            <Button className="text-gray-900 focus:outline-none" onClick={() => history.push(`navers/editar/${naver.id}`)}>Edit</Button>
-            <Button className="text-gray-900 focus:outline-none" onClick={() => openNaver(naver)}>Show</Button>
+            <Button className="text-gray-900 w-full focus:outline-none" onClick={() => openNaver(naver)}>Mostrar</Button>
+            <div className="mt-2 grid grid-cols-2 gap-4">
+              <IconButton aria-label="atualizar-naver" icon={MdModeEdit} className="text-gray-900 focus:outline-none" onClick={() => history.push(`navers/editar/${naver.id}`)} />
+              <IconButton aria-label="remove-label" icon={MdDelete} className="text-gray-900 focus:outline-none" onClick={() => openDeleteNaver(naver)} />
+            </div>
           </div>
         </div>
       </div>
