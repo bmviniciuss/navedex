@@ -13,9 +13,10 @@ import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNavers } from '../../external/api'
 
 import './styles.css'
+import DeleteNaverPopup from '../../compoents/DeleteNaverPopup'
 
 const DashboardPage:React.FC = () => {
-  const { naver, closeNaver } = useContext(NaverModalContext)
+  const { naver, closeNaver, closeDeleteNaver, deleteNaver } = useContext(NaverModalContext)
 
   const history = useHistory()
   const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
@@ -56,6 +57,9 @@ const DashboardPage:React.FC = () => {
 
   return (
     <section>
+      {deleteNaver && (
+        <DeleteNaverPopup isOpen={true} naver={deleteNaver} onClose={closeDeleteNaver}/>
+      )}
       {naver && (
         <NaverModal naver={naver} onClose={closeNaver} />
       )}

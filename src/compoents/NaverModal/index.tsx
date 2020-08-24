@@ -1,11 +1,12 @@
 import { IconButton } from '@chakra-ui/core'
 import moment from 'moment'
-import React from 'react'
-import { MdModeEdit } from 'react-icons/md'
+import React, { useContext } from 'react'
+import { MdModeEdit, MdDelete } from 'react-icons/md'
 import { useQuery } from 'react-query'
 import { useHistory } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 
+import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNaver } from '../../external/api'
 import { Naver } from '../../types'
 import Modal from '../Modal'
@@ -19,6 +20,8 @@ interface Props {
 
 const NaverModal:React.FC<Props> = ({ naver, onClose }) => {
   const history = useHistory()
+  const { openDeleteNaver } = useContext(NaverModalContext)
+
   const { data, isLoading } = useQuery([naver.id], getNaver, {
     refetchOnWindowFocus: false,
     retry: false,
@@ -59,7 +62,17 @@ const NaverModal:React.FC<Props> = ({ naver, onClose }) => {
               <p className="text-gray-900">{data.project}</p>
             </div>
 
-            <div>
+            <div className="mt-4">
+              <IconButton
+                className="focus:outline-none text-gray-900 mr-2"
+                aria-label="Remover"
+                icon={MdDelete}
+                onClick={() => {
+                  openDeleteNaver(data)
+                  onClose()
+                }}
+              />
+
               <IconButton
                 className="focus:outline-none text-gray-900"
                 aria-label="Atualizar"

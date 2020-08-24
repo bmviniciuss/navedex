@@ -13,6 +13,8 @@ export const getNavers = () => api.get<Naver[]>('navers').then(res => res.data)
 
 export const getNaver = (id: string) => api.get<Naver>(`navers/${id}`).then(res => res.data)
 
+export const deleteNaver = (id: string) => api.delete(`navers/${id}`).then(res => res.data)
+
 export const updateNaver = (id: string, body: CreateNaverType) => api.put<Naver>(`navers/${id}`, body).then(res => res.data)
 
 export const createNaver = (params: CreateNaverType) => api.post<Naver>('navers', params).then(res => res.data)
