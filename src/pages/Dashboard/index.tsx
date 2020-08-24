@@ -7,13 +7,13 @@ import { HashLoader } from 'react-spinners'
 import { ReactComponent as NoData } from '../../assets/undraw_no_data_qbuo.svg'
 import { ReactComponent as NotFound } from '../../assets/undraw_not_found_60pq.svg'
 import Button from '../../compoents/Button'
+import DeleteNaverPopup from '../../compoents/DeleteNaverPopup'
 import NaverCard from '../../compoents/NaverCard'
 import NaverModal from '../../compoents/NaverModal'
 import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNavers } from '../../external/api'
 
 import './styles.css'
-import DeleteNaverPopup from '../../compoents/DeleteNaverPopup'
 
 const DashboardPage:React.FC = () => {
   const { naver, closeNaver, closeDeleteNaver, deleteNaver } = useContext(NaverModalContext)
@@ -22,6 +22,7 @@ const DashboardPage:React.FC = () => {
   const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
     retry: false,
     refetchOnWindowFocus: false
+
   })
 
   const [filterInput, setFilterInput] = useState('')
@@ -116,7 +117,7 @@ const DashboardPage:React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 xl">
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {filtertedNavers.map((naver) => (
             <NaverCard key={naver.id} naver={naver}/>
           ))}
