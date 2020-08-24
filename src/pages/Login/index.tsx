@@ -1,4 +1,5 @@
 import React, { useReducer, useContext } from 'react'
+import { useMutation } from 'react-query'
 import { useHistory } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg'
@@ -11,6 +12,7 @@ import { loginReducer, initialState, LoginReducerTypes } from './loginReducer'
 const LoginPage: React.FC = () => {
   const auth = useContext(AuthContext)
   const [state, dispatch] = useReducer(loginReducer, initialState)
+  const [mutate, { isLoading, isError }] = useMutation(auth.login)
   const history = useHistory()
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,18 +23,15 @@ const LoginPage: React.FC = () => {
       dispatch({ type: LoginReducerTypes.SET_FIELD_ERRORS, errors })
       return
     }
-    dispatch({ type: LoginReducerTypes.LOGIN })
 
     const { data: { email, password } } = state
 
-    try {
-      await auth.login({ email, password })
-      dispatch({ type: LoginReducerTypes.LOGIN_SUCCESS })
-      history.push('/dashboard')
-    } catch (error) {
-      console.error(error)
-      dispatch({ type: LoginReducerTypes.LOGIN_ERROR, message: 'Email ou senha incorreta. Tente novamente.' })
-    }
+    dispatch({ type: LoginReducerTypes.LOGIN })
+    await mutate({ email, password }, {
+      onSuccess: () => {
+        history.push('/dashboard')
+      }
+    })
   }
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +52,7 @@ const LoginPage: React.FC = () => {
     return errors
   }
 
-  const { data, errors, globalError, loading } = state
+  const { data, errors } = state
   return (
     <section className="bg-gray-200  h-full flex flex-col justify-center items-center">
 
@@ -69,6 +68,7 @@ const LoginPage: React.FC = () => {
           error={errors.email}
           value={data.email}
           onChange={handleChange}
+          disabled={isLoading}
         />
 
         <Input
@@ -80,12 +80,13 @@ const LoginPage: React.FC = () => {
           value={data.password}
           onChange={handleChange}
           error={errors.password}
+          disabled={isLoading}
         />
 
-        {globalError && <Alert className="mt-5" text={globalError} type="error"/>}
+        {isError && <Alert className="mt-5" text='Email ou senha incorreta. Tente novamente.' type="error"/>}
 
         <div className="mt-5">
-          <Button fullWidth type="submit" loading={loading} disabled={loading} color="black">Entrar</Button>
+          <Button fullWidth type="submit" loading={isLoading} disabled={isLoading} color="black">Entrar</Button>
         </div>
 
       </form>
