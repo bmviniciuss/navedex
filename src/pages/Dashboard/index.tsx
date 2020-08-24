@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import { useHistory } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 
+import { ReactComponent as NotFound } from '../../assets/undraw_not_found_60pq.svg'
 import Button from '../../compoents/Button'
 import NaverCard from '../../compoents/NaverCard'
 import { getNavers } from '../../external/api'
@@ -14,9 +15,7 @@ const DashboardPage:React.FC = () => {
   const history = useHistory()
   const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
     retry: false,
-    onError: () => {
-      console.log('DEU RUIM')
-    }
+    refetchOnWindowFocus: false
   })
 
   const [filterInput, setFilterInput] = useState('')
@@ -31,9 +30,13 @@ const DashboardPage:React.FC = () => {
 
   if (isError) {
     return (
-      <div>
-        Erroo
-        <button onClick={() => refetch()}>Refetch</button>
+      <div className="h-full w-full flex flex-col justify-center items-center text-center text-gray-900">
+        <NotFound className="w-4/5 h-full sm:w-1/2 md:w-1/3 my-10" />
+        <p className="text-xl">
+          <span className="font-bold mr-2">Ops!</span>
+          Aconteu um erro ao buscar os Navers.
+        </p>
+        <p onClick={() => refetch()} className="text-lg hover:underline cursor-pointer text-teal-800">Tente Novamente.</p>
       </div>
     )
   }
