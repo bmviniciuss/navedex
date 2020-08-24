@@ -71,7 +71,6 @@ const UpdateNaver:React.FC = () => {
 
   const naverData = useMemo(() => {
     if (naver) {
-      console.log(naver)
       const { id, user_id, ...rest } = naver
       return {
         ...rest,
@@ -88,7 +87,7 @@ const UpdateNaver:React.FC = () => {
       </div>
     )
   }
-  console.log(naverData)
+
   return (
     <section>
       <div className="flex flex-row flex-wrap items-center">
