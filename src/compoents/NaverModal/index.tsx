@@ -56,7 +56,7 @@ const NaverModal:React.FC<Props> = ({ naver, onClose }) => {
               <p className="text-gray-900">{moment().diff(moment.utc(data.birthdate), 'years')} Anos</p>
 
               <p className="text-sm mt-2 text-gray-600">Tempo de Empresa</p>
-              <p className="text-gray-900">{moment.utc(data.birthdate).fromNow()}</p>
+              <p className="text-gray-900">{moment.utc(data.admission_date).fromNow()}</p>
 
               <p className="text-sm mt-2 text-gray-600">Projeto</p>
               <p className="text-gray-900">{data.project}</p>
