@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/core'
 import moment from 'moment'
 import React, { useEffect, useState, useMemo } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
@@ -15,6 +16,7 @@ function toInputFormat (timestamp:string) {
 }
 
 const UpdateNaver:React.FC = () => {
+  const toast = useToast()
   const [loading, setLoading] = useState(true)
   const [naver, setNaver] = useState<Naver | undefined>(undefined)
   const [queryError, setQueryError] = useState('')
@@ -41,10 +43,24 @@ const UpdateNaver:React.FC = () => {
     setUpdateError('')
     try {
       await updateNaver(id, params)
-      setSuccess(true)
+      toast({
+        title: 'Succeso',
+        description: 'Naver atualizado com sucesso.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right'
+      })
       await handleGetNaver(id)
     } catch (error) {
-      setUpdateError('Ocorreu um erro ao atualizar o Naver.')
+      toast({
+        title: 'Erro',
+        description: 'Ocorreu um erro ao atualizar o Naver.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right'
+      })
       throw error
     }
   }
