@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import { useHistory } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 
+import { ReactComponent as NoData } from '../../assets/undraw_no_data_qbuo.svg'
 import { ReactComponent as NotFound } from '../../assets/undraw_not_found_60pq.svg'
 import Button from '../../compoents/Button'
 import NaverCard from '../../compoents/NaverCard'
@@ -96,12 +97,21 @@ const DashboardPage:React.FC = () => {
       <div>
         {filter && <p className="italic text-sm mb-3 text-gray-700">{`Mostrando resultados para "${filter}"...`}</p>}
       </div>
-
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 xl">
-        {filtertedNavers.map((naver) => (
-          <NaverCard key={naver.id} naver={naver}/>
-        ))}
-      </div>
+      {filtertedNavers.length === 0 ? (
+        <div className="h-full w-full flex flex-col justify-center items-center">
+          <NoData className="w-4/5 h-full sm:w-1/2 md:w-1/3 my-10" />
+          <p className="text-xl">
+            <span className="font-bold mr-2">Ops!</span>
+          Nenhum Naver foi encontrado.
+          </p>
+        </div>
+      ) : (
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 xl">
+          {filtertedNavers.map((naver) => (
+            <NaverCard key={naver.id} naver={naver}/>
+          ))}
+        </div>
+      )}
     </section>
   )
 }
