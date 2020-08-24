@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import moment from 'moment'
 import React, { useReducer } from 'react'
 
 import { CreateNaverType } from '../../external/types'
@@ -38,12 +38,10 @@ const NaverForm:React.FC<Props> = ({ handleRequest, naverInitialState }) => {
     } else {
       dispatch({ type: NaverFormReducerTypes.ACTION })
       try {
-        console.log('ORIGINAL', data.birthdate)
-
         const toPostData:FormData = {
           ...data,
-          birthdate: format(parseDate(data.birthdate), 'dd/MM/yyyy'),
-          admission_date: format(parseDate(data.admission_date), 'dd/MM/yyyy')
+          birthdate: moment(parseDate(data.birthdate)).format('DD/MM/yyyy'),
+          admission_date: moment(parseDate(data.admission_date)).format('DD/MM/yyyy')
         }
         console.log(toPostData)
         await handleRequest(toPostData)
@@ -51,7 +49,6 @@ const NaverForm:React.FC<Props> = ({ handleRequest, naverInitialState }) => {
       } catch (error) {
         dispatch({ type: NaverFormReducerTypes.ACTION_ERROR })
       }
-      console.log(data)
     }
   }
 

@@ -1,5 +1,5 @@
 import { Button, IconButton } from '@chakra-ui/core'
-import { differenceInYears } from 'date-fns'
+import moment from 'moment'
 import React, { useContext } from 'react'
 import { MdModeEdit, MdDelete } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
@@ -15,7 +15,7 @@ const NaverCard:React.FC<Props> = ({ naver }) => {
   const { openNaver, openDeleteNaver } = useContext(NaverModalContext)
   const history = useHistory()
 
-  const age = differenceInYears(new Date(), new Date(naver.birthdate))
+  const age = moment.utc(naver.birthdate).fromNow(true)
   return (
     <div >
       <div className="relative" style={{ paddingBottom: '100%' }}>
@@ -28,7 +28,7 @@ const NaverCard:React.FC<Props> = ({ naver }) => {
               {naver.job_role}
             </span>
             <div className="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide break-words">
-              {age} Anos
+              {age}
             </div>
           </div>
           <h4 className="mt-1 font-semibold text-lg leading-tight break-words">{naver.name}</h4>
