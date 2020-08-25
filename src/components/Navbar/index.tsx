@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 import AuthContext from '../../contexts/AuthContext'
@@ -7,6 +7,7 @@ import AuthContext from '../../contexts/AuthContext'
 const Navbar:React.FC = () => {
   const { logout, user } = useContext(AuthContext)
   const history = useHistory()
+  const location = useLocation()
 
   return (
     <header className="text-gray-700 py-1 body-font border">
@@ -15,7 +16,7 @@ const Navbar:React.FC = () => {
           <Logo className="w-24"/>
         </Link>
         <div className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          {user && (
+          {user && location.pathname !== '/' && (
 
             <button
               onClick={() => {
