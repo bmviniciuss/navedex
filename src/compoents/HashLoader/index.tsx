@@ -9,7 +9,7 @@ interface Props {
 const HashLoader:React.FC<Props> = ({ className, loading }) => {
   const classes = useMemo(() => {
     return ['flex flex-col justify-center items-center h-full w-full', className].join(' ')
-  }, [])
+  }, [className])
 
   return (
     <div className={classes}>
