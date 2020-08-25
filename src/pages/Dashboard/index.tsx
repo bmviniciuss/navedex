@@ -2,18 +2,18 @@ import React, { useState, useMemo, useContext } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useQuery } from 'react-query'
 import { useHistory } from 'react-router-dom'
-import { HashLoader } from 'react-spinners'
 
 import { ReactComponent as NoData } from '../../assets/undraw_no_data_qbuo.svg'
 import Button from '../../compoents/Button'
 import DeleteNaverPopup from '../../compoents/DeleteNaverPopup'
+import HashLoader from '../../compoents/HashLoader'
 import NaverCard from '../../compoents/NaverCard'
 import NaverModal from '../../compoents/NaverModal'
 import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNavers } from '../../external/api'
+import NaversNotFound from './NaversNotFound'
 
 import './styles.css'
-import NaversNotFound from './NaversNotFound'
 
 const DashboardPage:React.FC = () => {
   const { naver, closeNaver, closeDeleteNaver, deleteNaver } = useContext(NaverModalContext)
@@ -42,9 +42,7 @@ const DashboardPage:React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col justify-center items-center h-full w-full mt-16">
-        <HashLoader size="35px" css='display: block; margin: 0 auto;' color="#1A202C" loading={isLoading} />
-      </div>
+      <HashLoader className="my-24" loading={isLoading} />
     )
   }
 
