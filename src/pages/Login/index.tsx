@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
     dispatch({ type: LoginReducerTypes.LOGIN })
     await mutate({ email, password }, {
       onSuccess: () => {
-        history.push('/dashboard')
+        history.push('/navers')
       }
     })
   }
@@ -54,7 +54,7 @@ const LoginPage: React.FC = () => {
 
   const { data, errors } = state
   return (
-    <section className="bg-gray-200  h-full flex flex-col justify-center items-center">
+    <section className="h-full flex flex-col justify-center items-center">
 
       <form onSubmit={onSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col max-w-2xl">
         <Logo />

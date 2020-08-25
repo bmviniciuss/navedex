@@ -6,18 +6,20 @@ import PrivateRoute from './components/PrivateRoute'
 import AddNaver from './pages/AddNaver'
 import DashboardPage from './pages/Dashboard'
 import LoginPage from './pages/Login'
+import NotFoundPage from './pages/NotFound'
 import UpdateNaver from './pages/UpdateNaver'
 
 const App:React.FC = () => {
   return (
-    <Switch>
-      <Route exact path="/" component={LoginPage}></Route>
-      <Layout>
-        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+    <Layout>
+      <Switch>
+        <Route exact path="/" component={LoginPage}></Route>
+        <PrivateRoute exact path="/navers" component={DashboardPage} />
         <PrivateRoute exact path="/navers/criar" component={AddNaver} />
         <PrivateRoute exact path="/navers/editar/:id" component={UpdateNaver} />
-      </Layout>
-    </Switch>
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Layout>
   )
 }
 

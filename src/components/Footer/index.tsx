@@ -7,7 +7,7 @@ const Footer:React.FC = () => {
     <footer className="text-gray-700 body-font mt-4">
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <div className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-          <Link to="/dashboard" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+          <Link to="/navers" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <span className="ml-3 text-xl">Nave.rs</span>
           </Link>
         </div>
