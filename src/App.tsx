@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Layout from './compoents/Layout'
-import PrivateRoute from './compoents/PrivateRoute'
+import Layout from './components/Layout'
+import PrivateRoute from './components/PrivateRoute'
 import AddNaver from './pages/AddNaver'
 import DashboardPage from './pages/Dashboard'
 import LoginPage from './pages/Login'

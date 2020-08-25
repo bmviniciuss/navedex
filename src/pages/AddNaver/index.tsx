@@ -4,8 +4,8 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { useMutation } from 'react-query'
 import { useHistory } from 'react-router-dom'
 
-import Alert from '../../compoents/Alert'
-import NaverForm from '../../compoents/NaverForm'
+import Alert from '../../components/Alert'
+import NaverForm from '../../components/NaverForm'
 import { createNaver } from '../../external/api'
 import { CreateNaverType } from '../../external/types'
 

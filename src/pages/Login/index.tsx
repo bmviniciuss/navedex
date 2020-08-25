@@ -3,9 +3,9 @@ import { useMutation } from 'react-query'
 import { useHistory } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg'
-import Alert from '../../compoents/Alert'
-import Button from '../../compoents/Button'
-import Input from '../../compoents/Input'
+import Alert from '../../components/Alert'
+import Button from '../../components/Button'
+import Input from '../../components/Input'
 import AuthContext from '../../contexts/AuthContext'
 import { loginReducer, initialState, LoginReducerTypes } from './loginReducer'
 
