@@ -12,8 +12,29 @@
 
 </div>
 
+## Demo
+[Live Demo](https://navedex-bmviniciuss.netlify.app/)
+
 ## Tecnologias
 A aplicação foi construida usando [`React`](https://pt-br.reactjs.org/) e [`TypeScript`](https://www.typescriptlang.org/). A estilização foi feita usando [`Tailwind`](https://tailwindcss.com/) e [`Chakra UI`](https://chakra-ui.com/). O projeto seguiu os padrões do [`JavaScript Standard Style`](https://standardjs.com/) em integração com o [`ESLint`](https://eslint.org/). As requisições http foram feitas utlizado o [`axios`](https://github.com/axios/axios) em conjunto com o [`React Query`](https://github.com/tannerlinsley/react-query).
+
+## Como rodar Localmente?
+- Clone o repositório
+```bash
+git clone https://github.com/bmviniciuss/navedex
+```
+- Entre na pasta
+```bash
+cd navedex
+```
+- Instale as dependências
+```bash
+npm i
+```
+- Execute a aplicação
+```bash
+npm run start
+```
 
 ## Dificuldades
 ### Estilização
