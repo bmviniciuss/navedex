@@ -12,25 +12,3 @@ body {
 #root {
   height: 100%;
 }
-
-.Toastify__toast {
-  @apply rounded;
-}
-
-.Toastify__toast--success {
-  @apply bg-green-600;
-  @apply text-white;
-}
-
-.Toastify__toast--success .Toastify__close-button {
-  @apply text-white;
-}
-
-.Toastify__toast--error {
-  @apply bg-red-700;
-  @apply text-white;
-}
-
-.Toastify__toast--error .Toastify__close-button {
-  @apply text-white;
-}

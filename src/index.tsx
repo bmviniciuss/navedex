@@ -4,10 +4,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import Providers from './Providers'
 
-import 'react-toastify/dist/ReactToastify.css'
 import './styles/index.css'
-
-// Modal.setAppElement('#root')
 
 ReactDOM.render(
   <React.StrictMode>
