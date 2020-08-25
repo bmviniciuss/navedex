@@ -13,8 +13,6 @@ import { getNavers } from '../../external/api'
 import NaversNotFound from './NaversNotFound'
 import NoData from './NoData'
 
-import './styles.css'
-
 const DashboardPage:React.FC = () => {
   const { naver, closeNaver, closeDeleteNaver, deleteNaver } = useContext(NaverModalContext)
   const history = useHistory()
@@ -27,6 +25,7 @@ const DashboardPage:React.FC = () => {
     refetchOnWindowFocus: false
   })
 
+  // Filter users by name
   const filteredNavers = useMemo(() => {
     if (!data) return []
     return filter ? data.filter((naver) => {
@@ -56,7 +55,7 @@ const DashboardPage:React.FC = () => {
       )}
       <h1 className="font-bold text-gray-900 text-4xl mb-3">Navers</h1>
 
-      <div className="mb-8 flex flex-row justify-between flex-wrap">
+      <div className="mb-8 flex justify-between flex-col sm:flex-row">
         <form
           className="search-naver-form w-64"
           onSubmit={(e) => {
@@ -89,7 +88,7 @@ const DashboardPage:React.FC = () => {
 
         </form>
 
-        <div className="create-navers-wrapper">
+        <div className="create-navers-wrapper mt-4 sm:mt-0">
           <Button color="black" onClick={() => history.push('/navers/criar')}>Adicionar Naver</Button>
         </div>
 
