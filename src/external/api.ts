@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { Naver } from '../types'
-import { LoginParams, LoginReturnType, CreateNaverType } from './types'
+import { LoginParams, LoginReturnType, CreateNaverType, UpdateNaverType } from './types'
 
 export const api = axios.create({
   baseURL: 'https://navedex-api.herokuapp.com/v1/'
@@ -15,6 +15,9 @@ export const getNaver = (id: string) => api.get<Naver>(`navers/${id}`).then(res 
 
 export const deleteNaver = (id: string) => api.delete(`navers/${id}`).then(res => res.data)
 
-export const updateNaver = (id: string, body: CreateNaverType) => api.put<Naver>(`navers/${id}`, body).then(res => res.data)
+export const updateNaver = (params: UpdateNaverType) => {
+  const { id, ...rest } = params
+  return api.put<Naver>(`navers/${id}`, rest).then(res => res.data)
+}
 
 export const createNaver = (params: CreateNaverType) => api.post<Naver>('navers', params).then(res => res.data)

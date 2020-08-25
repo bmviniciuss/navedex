@@ -4,7 +4,13 @@ import React, { useReducer } from 'react'
 import { CreateNaverType } from '../../external/types'
 import Button from '../Button'
 import Input from '../Input'
-import { naverFormReducer, initialState, NaverFormReducerTypes, ErrorsType, NaverFormState } from './naverFormReducer'
+import {
+  naverFormReducer,
+  initialState,
+  NaverFormReducerTypes,
+  ErrorsType,
+  NaverFormState
+} from './naverFormReducer'
 
 export interface FormData {
   name: string
@@ -43,7 +49,6 @@ const NaverForm:React.FC<Props> = ({ handleRequest, naverInitialState }) => {
           birthdate: moment(parseDate(data.birthdate)).format('DD/MM/yyyy'),
           admission_date: moment(parseDate(data.admission_date)).format('DD/MM/yyyy')
         }
-        console.log(toPostData)
         await handleRequest(toPostData)
         dispatch({ type: NaverFormReducerTypes.ACTION_SUCCESS })
       } catch (error) {

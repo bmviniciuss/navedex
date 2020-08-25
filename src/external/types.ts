@@ -17,3 +17,13 @@ export interface CreateNaverType {
   admission_date: string
   url: string
 }
+
+export interface UpdateNaverType {
+  id: string
+  name: string
+  birthdate: string
+  job_role: string
+  project: string
+  admission_date: string
+  url: string
+}
