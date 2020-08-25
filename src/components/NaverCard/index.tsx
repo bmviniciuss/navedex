@@ -1,6 +1,5 @@
 import { Button, IconButton } from '@chakra-ui/core'
-import moment from 'moment'
-import React, { useContext, memo, useMemo } from 'react'
+import React, { useContext, memo } from 'react'
 import { MdModeEdit, MdDelete } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
@@ -14,9 +13,6 @@ interface Props {
 const NaverCard:React.FC<Props> = ({ naver }) => {
   const { openNaver, openDeleteNaver } = useContext(NaverModalContext)
   const history = useHistory()
-  const age = useMemo(() => {
-    return moment.utc(naver.birthdate).fromNow(true)
-  }, [naver.birthdate])
 
   return (
     <div >
