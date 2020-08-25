@@ -1,6 +1,7 @@
 import { useToast } from '@chakra-ui/core'
-import React, { useState } from 'react'
+import React from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
+import { useMutation } from 'react-query'
 import { useHistory } from 'react-router-dom'
 
 import Alert from '../../compoents/Alert'
@@ -10,25 +11,21 @@ import { CreateNaverType } from '../../external/types'
 
 const AddNaver:React.FC = () => {
   const toast = useToast()
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-
   const history = useHistory()
 
-  async function makeCreateRequest (data: CreateNaverType) {
-    setError('')
-    setSuccess(false)
-    try {
-      await createNaver(data)
-      setSuccess(true)
+  // mutation
+  const [mutate, { isError }] = useMutation(createNaver, {
+    onSuccess: () => {
       toast({
-        title: 'Naver Criado',
+        title: 'Sucesso',
+        description: 'Naver Criado',
         status: 'success',
         duration: 5000,
         isClosable: true,
         position: 'top-right'
       })
-    } catch (error) {
+    },
+    onError: () => {
       toast({
         title: 'Erro',
         description: 'Ocorreu um erro ao criar o Naver. Tente novamente.',
@@ -37,8 +34,11 @@ const AddNaver:React.FC = () => {
         isClosable: true,
         position: 'top-right'
       })
-      throw new Error(error)
     }
+  })
+
+  async function makeCreateRequest (data: CreateNaverType) {
+    return mutate(data)
   }
 
   return (
@@ -55,8 +55,7 @@ const AddNaver:React.FC = () => {
 
       </div>
 
-      {success && <Alert className="my-4" text="Naver criado com sucesso." type="success"/>}
-      {error && <Alert className="my-4" text={error} type="error"/>}
+      {isError && <Alert className="my-4" text="Ocorreu um erro ao criar o Naver" type="error"/>}
 
       <div className="mt-4">
         <NaverForm handleRequest={makeCreateRequest}/>
