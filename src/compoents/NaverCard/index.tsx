@@ -1,6 +1,6 @@
 import { Button, IconButton } from '@chakra-ui/core'
 import moment from 'moment'
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { MdModeEdit, MdDelete } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
@@ -49,4 +49,4 @@ const NaverCard:React.FC<Props> = ({ naver }) => {
   )
 }
 
-export default NaverCard
+export default memo(NaverCard)
