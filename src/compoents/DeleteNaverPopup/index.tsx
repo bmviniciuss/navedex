@@ -25,13 +25,6 @@ const DeleteNaverPopup:React.FC<Props> = ({ isOpen, naver, onClose }) => {
   const [mutate, { isLoading }] = useMutation(deleteNaver, {
     onSuccess: () => {
       queryCache.invalidateQueries('navers')
-    }
-  })
-
-  async function handleMutation () {
-    try {
-      await mutate(naver.id)
-      onClose()
       toast({
         title: 'Succeso',
         description: 'Naver Removido',
@@ -40,7 +33,9 @@ const DeleteNaverPopup:React.FC<Props> = ({ isOpen, naver, onClose }) => {
         isClosable: true,
         position: 'top-right'
       })
-    } catch (error) {
+      onClose()
+    },
+    onError: () => {
       toast({
         title: 'Erro',
         description: 'Ocorreu um erro ao remover o Naver.',
@@ -50,6 +45,10 @@ const DeleteNaverPopup:React.FC<Props> = ({ isOpen, naver, onClose }) => {
         position: 'top-right'
       })
     }
+  })
+
+  async function handleMutation () {
+    return mutate(naver.id)
   }
 
   const cancelRef = useRef<HTMLButtonElement | null>(null)
