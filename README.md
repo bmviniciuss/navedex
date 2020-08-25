@@ -5,12 +5,18 @@
 <hr />
 <h3 align="center">Navedex - A React TypeScript Frontend Challenge</h3>
 
+
 <div align="center">
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ea2bd15f-feb2-4546-b96c-9b89694e1927/deploy-status)](https://app.netlify.com/sites/navedex-bmviniciuss/deploys)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 </div>
+
+<div align="center">
+  <img src="./docs/home.png" />
+</div>
+
 
 ## Demo
 [Live Demo](https://navedex-bmviniciuss.netlify.app/)
