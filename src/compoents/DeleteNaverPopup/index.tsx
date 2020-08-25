@@ -1,7 +1,15 @@
-import { Button, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter } from '@chakra-ui/core'
+import {
+  Button,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  useToast
+} from '@chakra-ui/core'
 import React, { useRef } from 'react'
 import { useMutation, queryCache } from 'react-query'
-import { toast } from 'react-toastify'
 
 import { deleteNaver } from '../../external/api'
 import { Naver } from '../../types'
@@ -13,6 +21,7 @@ interface Props {
 }
 
 const DeleteNaverPopup:React.FC<Props> = ({ isOpen, naver, onClose }) => {
+  const toast = useToast()
   const [mutate, { isLoading }] = useMutation(deleteNaver, {
     onSuccess: () => {
       queryCache.invalidateQueries('navers')
@@ -23,9 +32,23 @@ const DeleteNaverPopup:React.FC<Props> = ({ isOpen, naver, onClose }) => {
     try {
       await mutate(naver.id)
       onClose()
-      toast.success('Naver removido.')
+      toast({
+        title: 'Succeso',
+        description: 'Naver Removido',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right'
+      })
     } catch (error) {
-      toast.error('Ocorreu um erro ao excluir o naver.')
+      toast({
+        title: 'Erro',
+        description: 'Ocorreu um erro ao remover o Naver.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right'
+      })
     }
   }
 
