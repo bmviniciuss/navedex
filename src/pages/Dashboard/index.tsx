@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom'
 import Button from '../../compoents/Button'
 import DeleteNaverPopup from '../../compoents/DeleteNaverPopup'
 import HashLoader from '../../compoents/HashLoader'
-import NaverCard from '../../compoents/NaverCard'
 import NaverModal from '../../compoents/NaverModal'
+import NaversList from '../../compoents/NaversList'
 import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNavers } from '../../external/api'
 import NaversNotFound from './NaversNotFound'
@@ -27,7 +27,7 @@ const DashboardPage:React.FC = () => {
     refetchOnWindowFocus: false
   })
 
-  const filtertedNavers = useMemo(() => {
+  const filteredNavers = useMemo(() => {
     if (!data) return []
     return filter ? data.filter((naver) => {
       return naver.name.trim().toLowerCase().includes(filter.trim().toLowerCase())
@@ -98,14 +98,10 @@ const DashboardPage:React.FC = () => {
       <div>
         {filter && <p className="italic text-sm mb-3 text-gray-700">{`Mostrando resultados para "${filter}"...`}</p>}
       </div>
-      {filtertedNavers.length === 0 ? (
+      {filteredNavers.length === 0 ? (
         <NoData />
       ) : (
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {filtertedNavers.map((naver) => (
-            <NaverCard key={naver.id} naver={naver}/>
-          ))}
-        </div>
+        <NaversList navers={filteredNavers}/>
       )}
     </section>
   )
