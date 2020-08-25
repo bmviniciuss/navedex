@@ -30,7 +30,7 @@ const NaverCard:React.FC<Props> = ({ naver }) => {
               {naver.job_role}
             </span>
           </div>
-          <h4 className="mt-1 font-semibold text-lg leading-tight break-words truncate">{naver.name}</h4>
+          <h4 className="mt-2 font-semibold text-lg leading-tight break-words truncate">{naver.name}</h4>
           <p className="mt-3 truncate text-gray-600 text-sm">Projetos</p>
           <p className="truncate">{ naver.project ? naver.project : 'Sem Projetos'}</p>
           <div className="mt-4">
