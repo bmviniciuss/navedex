@@ -11,7 +11,7 @@ const NotFoundPage:React.FC = () => {
         <span className="font-bold mr-2">Ops!</span>
         Essa página não foi encontrada.
         <br/>
-        <Link to="/" className="hover:underline text-gray-800">
+        <Link to="/navers" className="hover:underline text-gray-800">
           Volte aqui.
         </Link>
       </p>
