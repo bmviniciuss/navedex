@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 
 import { ReactComponent as NoData } from '../../assets/undraw_no_data_qbuo.svg'
-import { ReactComponent as NotFound } from '../../assets/undraw_not_found_60pq.svg'
 import Button from '../../compoents/Button'
 import DeleteNaverPopup from '../../compoents/DeleteNaverPopup'
 import NaverCard from '../../compoents/NaverCard'
@@ -14,18 +13,19 @@ import NaverModalContext from '../../contexts/NaverModalContext'
 import { getNavers } from '../../external/api'
 
 import './styles.css'
+import NaversNotFound from './NaversNotFound'
 
 const DashboardPage:React.FC = () => {
   const { naver, closeNaver, closeDeleteNaver, deleteNaver } = useContext(NaverModalContext)
-
   const history = useHistory()
+  const [filterInput, setFilterInput] = useState('')
+  const [filter, setFilter] = useState('')
+
+  // query
   const { data, isLoading, isError, refetch } = useQuery('navers', getNavers, {
     retry: false,
     refetchOnWindowFocus: false
   })
-
-  const [filterInput, setFilterInput] = useState('')
-  const [filter, setFilter] = useState('')
 
   const filtertedNavers = useMemo(() => {
     if (!data) return []
@@ -36,14 +36,7 @@ const DashboardPage:React.FC = () => {
 
   if (isError) {
     return (
-      <div className="h-full w-full flex flex-col justify-center items-center text-center text-gray-900">
-        <NotFound className="w-4/5 h-full sm:w-1/2 md:w-1/3 my-10" />
-        <p className="text-xl">
-          <span className="font-bold mr-2">Ops!</span>
-          Aconteu um erro ao buscar os Navers.
-        </p>
-        <p onClick={() => refetch()} className="text-lg hover:underline cursor-pointer text-teal-800">Tente Novamente.</p>
-      </div>
+      <NaversNotFound refetch={() => refetch()} />
     )
   }
 
